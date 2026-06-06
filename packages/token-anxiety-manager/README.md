@@ -55,4 +55,17 @@ npx @vscode/vsce package --no-dependencies
 | `tokenAnxiety.warnThresholds` | `[0.5, 0.8, 0.95]` | Budget-used fractions that trigger alerts. |
 | `tokenAnxiety.highCostCredits` | `50` | Warn above this many credits for a single request. |
 
+## Auto-sync with GitHub Copilot Enterprise billing
+
+Keep the gauge accurate without manual entry:
+
+1. Run **Token Anxiety: Connect GitHub Billing** and paste a GitHub token with billing read.
+   - Enterprise seats: `manage_billing:enterprise` (or `read:enterprise`).
+   - Org-managed seats: an organization billing-admin token.
+   The token is stored in VS Code **SecretStorage** — never in settings or the repo.
+2. Set `tokenAnxiety.github.scope` (`enterprise` or `organization`) and `tokenAnxiety.github.slug` (your enterprise slug or org login). Optionally set `tokenAnxiety.github.username` (blank = derived from your GitHub sign-in).
+3. Done. The extension calls `…/settings/billing/ai_credit/usage` for the current month, scoped to your GitHub user, and reconciles the ledger — on activation, every few hours (`tokenAnxiety.autoSyncIntervalHours`), and whenever you run **Sync Usage with GitHub**.
+
+Why a token is needed: for **enterprise-managed** seats the personal billing endpoint returns nothing, so the org/enterprise (admin-scoped) endpoint is required. GitHub's billing data is aggregated (~daily), so the synced figure is "accurate as of the last report" and the local estimate bridges between refreshes. Because Enterprise credits are **pooled**, the per-user figure is your share, not the org pool.
+
 > Rates and allowances are seeded from GitHub's published table (verified 2026-06-06) and should be re-checked when GitHub updates pricing.

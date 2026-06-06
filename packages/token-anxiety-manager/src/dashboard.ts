@@ -10,6 +10,7 @@ export interface DashboardData {
   summary: BudgetSummary;
   byModel: Array<{ modelId: string; credits: number; usd: number; count: number }>;
   planLabel: string;
+  lastSyncedAt?: Date;
 }
 
 export class DashboardProvider implements vscode.WebviewViewProvider {
@@ -41,6 +42,7 @@ export class DashboardProvider implements vscode.WebviewViewProvider {
   private render(data: DashboardData): string {
     const s = data.summary;
     const total = s.usedCredits || 1;
+    const synced = data.lastSyncedAt ? `Last synced ${data.lastSyncedAt.toLocaleString()}` : 'Not synced yet';
     const accent =
       s.pctUsed >= 0.9
         ? 'var(--vscode-statusBarItem-errorBackground, #f14c4c)'
@@ -102,7 +104,7 @@ export class DashboardProvider implements vscode.WebviewViewProvider {
     <button class="sec" onclick="send('sync')">Sync</button>
     <button class="sec" onclick="send('setup')">Change plan</button>
   </div>
-  <div class="sync">Tracked locally · use Sync to reconcile with GitHub's usage dashboard.</div>
+  <div class="sync">${synced} · Sync reconciles with GitHub Copilot billing.</div>
 
   <script>
     const vscodeApi = acquireVsCodeApi();

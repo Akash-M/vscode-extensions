@@ -24,7 +24,9 @@
       { "command": "tokenAnxiety.estimate", "title": "Estimate a Request", "category": "Token Anxiety" },
       { "command": "tokenAnxiety.openDashboard", "title": "Open Dashboard", "category": "Token Anxiety" },
       { "command": "tokenAnxiety.sync", "title": "Sync Usage with GitHub", "category": "Token Anxiety" },
-      { "command": "tokenAnxiety.setup", "title": "Set Up / Change Plan", "category": "Token Anxiety" }
+      { "command": "tokenAnxiety.setup", "title": "Set Up / Change Plan", "category": "Token Anxiety" },
+      { "command": "tokenAnxiety.connectBilling", "title": "Connect GitHub Billing (token)", "category": "Token Anxiety" },
+      { "command": "tokenAnxiety.disconnectBilling", "title": "Disconnect GitHub Billing", "category": "Token Anxiety" }
     ],
     "viewsContainers": {
       "activitybar": [
@@ -75,6 +77,27 @@
           "type": "number",
           "default": 50,
           "description": "Warn when a single request is estimated above this many AI credits."
+        },
+        "tokenAnxiety.github.scope": {
+          "type": "string",
+          "enum": ["enterprise", "organization"],
+          "default": "enterprise",
+          "description": "Which GitHub billing scope to pull Copilot AI-credit usage from."
+        },
+        "tokenAnxiety.github.slug": {
+          "type": "string",
+          "default": "",
+          "description": "Your GitHub enterprise slug (or organization login) used for billing auto-sync."
+        },
+        "tokenAnxiety.github.username": {
+          "type": "string",
+          "default": "",
+          "description": "GitHub username to scope usage to. Blank = derive from your GitHub sign-in (falls back to the whole-entity total if unavailable)."
+        },
+        "tokenAnxiety.autoSyncIntervalHours": {
+          "type": "number",
+          "default": 6,
+          "description": "How often to auto-refresh usage from GitHub billing, in hours."
         }
       }
     },
