@@ -1,0 +1,22 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+out/
+*.vsix
+*.tsbuildinfo
+
+# Yarn (node-modules linker — keep releases/plugins, ignore cache & state)
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+.pnp.*
+
+# Logs & OS
+yarn-error.log
+npm-debug.log*
+.DS_Store
