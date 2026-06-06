@@ -3,7 +3,6 @@
   "displayName": "Token Anxiety Manager",
   "description": "See what every AI coding request costs — before you send it. Tool-agnostic across Copilot, Claude, and Codex.",
   "version": "0.1.0",
-  "private": true,
   "license": "MIT",
   "publisher": "akash-m",
   "repository": {
@@ -17,6 +16,12 @@
     "node": ">=20"
   },
   "categories": ["Other", "AI"],
+  "keywords": ["copilot", "ai credits", "token usage", "cost", "budget", "claude", "codex"],
+  "icon": "media/icon.png",
+  "galleryBanner": { "color": "#0d1117", "theme": "dark" },
+  "homepage": "https://github.com/Akash-M/vscode-extensions/tree/main/packages/token-anxiety-manager",
+  "bugs": { "url": "https://github.com/Akash-M/vscode-extensions/issues" },
+  "qna": "marketplace",
   "main": "./dist/extension.cjs",
   "activationEvents": ["onStartupFinished"],
   "contributes": {
