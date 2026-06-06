@@ -1,0 +1,17 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Run Token Anxiety Manager",
+      "type": "extensionHost",
+      "request": "launch",
+      "args": [
+        "--extensionDevelopmentPath=${workspaceFolder}/packages/token-anxiety-manager"
+      ],
+      "outFiles": [
+        "${workspaceFolder}/packages/token-anxiety-manager/dist/**/*.cjs"
+      ],
+      "preLaunchTask": "build: token-anxiety-manager"
+    }
+  ]
+}

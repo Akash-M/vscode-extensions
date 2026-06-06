@@ -37,7 +37,7 @@ yarn workspace token-anxiety-manager demo        # run the cost-engine validatio
 
 > The `demo` script runs through **tsx**, so it works on Node 18+. (Plain `node demo.ts` only works on Node ≥ 22.6, which is why it may fail on Node 20.)
 
-Then press **F5** in VS Code to launch an Extension Development Host.
+Then launch the Extension Development Host. Press **F5**, or — if F5 is remapped — open the Command Palette (`Cmd/Ctrl+Shift+P`) and run **Debug: Start Debugging** (or **Debug: Select and Start Debugging** → **Run Token Anxiety Manager**). You can also use the **Run and Debug** view and pick **Run Token Anxiety Manager**. The committed `.vscode/launch.json` points the dev host at this package and builds it first via the `build: token-anxiety-manager` task.
 
 ### Package a VSIX
 
