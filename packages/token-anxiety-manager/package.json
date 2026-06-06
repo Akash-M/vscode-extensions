@@ -6,6 +6,11 @@
   "private": true,
   "license": "MIT",
   "publisher": "akash-m",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Akash-M/vscode-extensions.git",
+    "directory": "packages/token-anxiety-manager"
+  },
   "type": "module",
   "engines": {
     "vscode": "^1.95.0",
