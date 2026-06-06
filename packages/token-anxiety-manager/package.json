@@ -11,53 +11,24 @@
     "vscode": "^1.95.0",
     "node": ">=20"
   },
-  "categories": [
-    "Other",
-    "AI"
-  ],
+  "categories": ["Other", "AI"],
   "main": "./dist/extension.cjs",
-  "activationEvents": [
-    "onStartupFinished"
-  ],
+  "activationEvents": ["onStartupFinished"],
   "contributes": {
     "commands": [
-      {
-        "command": "tokenAnxiety.estimate",
-        "title": "Estimate a Request",
-        "category": "Token Anxiety"
-      },
-      {
-        "command": "tokenAnxiety.openDashboard",
-        "title": "Open Dashboard",
-        "category": "Token Anxiety"
-      },
-      {
-        "command": "tokenAnxiety.sync",
-        "title": "Sync Usage with GitHub",
-        "category": "Token Anxiety"
-      },
-      {
-        "command": "tokenAnxiety.setup",
-        "title": "Set Up / Change Plan",
-        "category": "Token Anxiety"
-      }
+      { "command": "tokenAnxiety.estimate", "title": "Estimate a Request", "category": "Token Anxiety" },
+      { "command": "tokenAnxiety.openDashboard", "title": "Open Dashboard", "category": "Token Anxiety" },
+      { "command": "tokenAnxiety.sync", "title": "Sync Usage with GitHub", "category": "Token Anxiety" },
+      { "command": "tokenAnxiety.setup", "title": "Set Up / Change Plan", "category": "Token Anxiety" }
     ],
     "viewsContainers": {
       "activitybar": [
-        {
-          "id": "tokenAnxiety",
-          "title": "Token Anxiety",
-          "icon": "media/pulse.svg"
-        }
+        { "id": "tokenAnxiety", "title": "Token Anxiety", "icon": "media/pulse.svg" }
       ]
     },
     "views": {
       "tokenAnxiety": [
-        {
-          "id": "tokenAnxiety.dashboard",
-          "name": "Budget",
-          "type": "webview"
-        }
+        { "id": "tokenAnxiety.dashboard", "name": "Budget", "type": "webview" }
       ]
     },
     "chatParticipants": [
@@ -74,11 +45,7 @@
       "properties": {
         "tokenAnxiety.tool": {
           "type": "string",
-          "enum": [
-            "copilot",
-            "claude-code",
-            "codex"
-          ],
+          "enum": ["copilot", "claude-code", "codex"],
           "default": "copilot",
           "description": "Which assistant to track."
         },
@@ -89,22 +56,14 @@
         },
         "tokenAnxiety.compareModels": {
           "type": "array",
-          "items": {
-            "type": "string"
-          },
+          "items": { "type": "string" },
           "default": [],
           "description": "Model ids to include in the comparison. Empty means all models for the selected tool."
         },
         "tokenAnxiety.warnThresholds": {
           "type": "array",
-          "items": {
-            "type": "number"
-          },
-          "default": [
-            0.5,
-            0.8,
-            0.95
-          ],
+          "items": { "type": "number" },
+          "default": [0.5, 0.8, 0.95],
           "description": "Budget-used fractions that trigger alerts."
         },
         "tokenAnxiety.highCostCredits": {
@@ -124,17 +83,13 @@
             "id": "setup",
             "title": "Choose your plan",
             "description": "Pick your assistant and plan so we can show your monthly allowance.\n[Set up](command:tokenAnxiety.setup)",
-            "media": {
-              "markdown": "media/setup.md"
-            }
+            "media": { "markdown": "media/setup.md" }
           },
           {
             "id": "estimate",
             "title": "Estimate a request",
             "description": "Run a pre-flight estimate to compare model costs.\n[Estimate a request](command:tokenAnxiety.estimate)",
-            "media": {
-              "markdown": "media/estimate.md"
-            }
+            "media": { "markdown": "media/estimate.md" }
           }
         ]
       }
@@ -145,7 +100,7 @@
     "watch": "yarn build --watch",
     "typecheck": "tsc --noEmit",
     "clean": "rimraf dist",
-    "demo": "node demo.ts",
+    "demo": "tsx demo.ts",
     "vscode:prepublish": "esbuild src/extension.ts --bundle --outfile=dist/extension.cjs --external:vscode --format=cjs --platform=node --target=node20 --minify"
   },
   "devDependencies": {
@@ -153,6 +108,7 @@
     "@types/vscode": "^1.95.0",
     "esbuild": "^0.24.2",
     "rimraf": "^6.0.1",
+    "tsx": "^4.19.2",
     "typescript": "^5.7.3"
   }
 }

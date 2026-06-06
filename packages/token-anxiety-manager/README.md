@@ -35,6 +35,8 @@ yarn workspace token-anxiety-manager typecheck   # tsc --noEmit
 yarn workspace token-anxiety-manager demo        # run the cost-engine validation
 ```
 
+> The `demo` script runs through **tsx**, so it works on Node 18+. (Plain `node demo.ts` only works on Node ≥ 22.6, which is why it may fail on Node 20.)
+
 Then press **F5** in VS Code to launch an Extension Development Host.
 
 ### Package a VSIX
