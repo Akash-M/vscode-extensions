@@ -1,0 +1,113 @@
+{
+  "name": "token-anxiety-manager",
+  "displayName": "Token Anxiety Manager",
+  "description": "See what every AI coding request costs — before you send it. Tool-agnostic across Copilot, Claude, and Codex.",
+  "version": "0.1.0",
+  "private": true,
+  "license": "MIT",
+  "publisher": "akash-m",
+  "type": "module",
+  "engines": {
+    "vscode": "^1.95.0",
+    "node": ">=20"
+  },
+  "categories": ["Other", "AI"],
+  "main": "./dist/extension.cjs",
+  "activationEvents": ["onStartupFinished"],
+  "contributes": {
+    "commands": [
+      { "command": "tokenAnxiety.estimate", "title": "Estimate a Request", "category": "Token Anxiety" },
+      { "command": "tokenAnxiety.openDashboard", "title": "Open Dashboard", "category": "Token Anxiety" },
+      { "command": "tokenAnxiety.sync", "title": "Sync Usage with GitHub", "category": "Token Anxiety" },
+      { "command": "tokenAnxiety.setup", "title": "Set Up / Change Plan", "category": "Token Anxiety" }
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        { "id": "tokenAnxiety", "title": "Token Anxiety", "icon": "media/pulse.svg" }
+      ]
+    },
+    "views": {
+      "tokenAnxiety": [
+        { "id": "tokenAnxiety.dashboard", "name": "Budget", "type": "webview" }
+      ]
+    },
+    "chatParticipants": [
+      {
+        "id": "tokenAnxiety.participant",
+        "name": "tokenanxiety",
+        "fullName": "Token Anxiety",
+        "description": "Estimate what a request will cost before you send it",
+        "isSticky": true
+      }
+    ],
+    "configuration": {
+      "title": "Token Anxiety Manager",
+      "properties": {
+        "tokenAnxiety.tool": {
+          "type": "string",
+          "enum": ["copilot", "claude-code", "codex"],
+          "default": "copilot",
+          "description": "Which assistant to track."
+        },
+        "tokenAnxiety.plan": {
+          "type": "string",
+          "default": "copilot-enterprise",
+          "description": "Plan id used to derive the monthly allowance (see the onboarding picker)."
+        },
+        "tokenAnxiety.compareModels": {
+          "type": "array",
+          "items": { "type": "string" },
+          "default": [],
+          "description": "Model ids to include in the comparison. Empty means all models for the selected tool."
+        },
+        "tokenAnxiety.warnThresholds": {
+          "type": "array",
+          "items": { "type": "number" },
+          "default": [0.5, 0.8, 0.95],
+          "description": "Budget-used fractions that trigger alerts."
+        },
+        "tokenAnxiety.highCostCredits": {
+          "type": "number",
+          "default": 50,
+          "description": "Warn when a single request is estimated above this many AI credits."
+        }
+      }
+    },
+    "walkthroughs": [
+      {
+        "id": "tokenAnxiety.gettingStarted",
+        "title": "Get started with Token Anxiety",
+        "description": "Track AI spend before you send a request — no sign-in required.",
+        "steps": [
+          {
+            "id": "setup",
+            "title": "Choose your plan",
+            "description": "Pick your assistant and plan so we can show your monthly allowance.\n[Set up](command:tokenAnxiety.setup)",
+            "media": { "markdown": "media/setup.md" }
+          },
+          {
+            "id": "estimate",
+            "title": "Estimate a request",
+            "description": "Run a pre-flight estimate to compare model costs.\n[Estimate a request](command:tokenAnxiety.estimate)",
+            "media": { "markdown": "media/estimate.md" }
+          }
+        ]
+      }
+    ]
+  },
+  "scripts": {
+    "build": "esbuild src/extension.ts --bundle --outfile=dist/extension.cjs --external:vscode --format=cjs --platform=node --target=node20 --sourcemap",
+    "watch": "yarn build --watch",
+    "typecheck": "tsc --noEmit",
+    "clean": "rimraf dist",
+    "demo": "node demo.ts",
+    "vscode:prepublish": "esbuild src/extension.ts --bundle --outfile=dist/extension.cjs --external:vscode --format=cjs --platform=node --target=node20 --minify"
+  },
+  "devDependencies": {
+    "@types/node": "^20.17.0",
+    "@types/vscode": "^1.95.0",
+    "esbuild": "^0.24.2",
+    "rimraf": "^6.0.1",
+    "typescript": "^5.7.3"
+  }
+}

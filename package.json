@@ -1,0 +1,21 @@
+{
+  "name": "vscode-extensions",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Monorepo of VS Code extensions.",
+  "packageManager": "yarn@4.5.3",
+  "engines": {
+    "node": ">=20"
+  },
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "yarn workspaces foreach -A run build",
+    "typecheck": "yarn workspaces foreach -A run typecheck",
+    "clean": "yarn workspaces foreach -A run clean"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.3"
+  }
+}
